@@ -1,0 +1,78 @@
+@prefix schema: <http://schema.org/> .
+@prefix dct:   <http://purl.org/dc/terms/> .
+@prefix spdx:  <http://spdx.org/rdf/terms#> .
+@prefix adms:  <http://www.w3.org/ns/adms#> .
+@prefix org:   <http://www.w3.org/ns/org#> .
+@prefix v:     <http://www.w3.org/2006/vcard/ns#> .
+@prefix skos:  <http://www.w3.org/2004/02/skos/core#> .
+@prefix time:  <http://www.w3.org/2006/time#> .
+@prefix locn:  <http://www.w3.org/ns/locn#> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix gmd:   <http://www.isotc211.org/2005/gmd#> .
+
+
+<http://example.eu/set/data/test-dataset>
+  a                  dcat:Dataset ;
+  dct:description    "Mole Valley District Council (MVDC).\r\nContracts Register.\r\nPublished under Transparency Code 2014 and Open Government Licence (OGL). \r\nCSV Format. \r\nQuarterly Publication. \r\nIn accordance with LGA guidance http://schemas.opendata.esd.org.uk/Spend.  \r\nSurrey, UK."@en ;
+  dct:language       <http://publications.europa.eu/resource/authority/language/ENG> ;
+  dct:publisher      [ a          foaf:Agent ;
+                       dct:type   <http://purl.org/adms/publishertype/NationalAuthority> ;
+                       foaf:name  "Mole Valley District Council"
+                     ] ;
+  dct:title          "Contracts Register"@en ;
+  dcat:contactPoint  [ a           v:Kind ;
+                       v:fn        "Finance Department"@en ;
+                       v:hasEmail  <mailto:finance@molevalley.gov.uk>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=51592>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                      dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=38637>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=36244>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/HTML> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/index.cfm?articleid=29393>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=42184>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=35871>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=49124>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=45697>
+                     ] ;
+  dcat:distribution  [ a               dcat:Distribution ;
+                       dct:format      <http://publications.europa.eu/resource/authority/file-type/XLS> ;
+                       dct:license     <http://reference.data.gov.uk/id/open-government-licence> ;
+                       dcat:accessURL  <http://www.molevalley.gov.uk/media.cfm?mediaid=28413>
+                     ] ;
+  dcat:theme         <http://publications.europa.eu/resource/authority/data-theme/ENVI>.
+
+<http://reference.data.gov.uk/id/open-government-licence>
+        a               dct:LicenseDocument ;
+        dct:identifier  "uk-ogl" ;
+        dct:title       "UK Open Government Licence (OGL)" .

@@ -1,0 +1,907 @@
+# Note: An invalid OpenAPI 3 yaml file will cause the following exception at startup:
+# io.vertx.ext.web.api.contract.RouterFactoryException: Wrong specification url/path: webroot/openapi.yaml
+
+
+# A Swagger 3.0 (a.k.a. OpenAPI) definition of the Engine API.
+#
+# This is used for generating API documentation and the types used by the
+# client/server. See api/README.md for more information.
+#
+# Some style notes:
+# - This file is used by ReDoc, which allows GitHub Flavored Markdown in
+#   descriptions.
+# - There is no maximum line length, for ease of editing and pretty diffs.
+# - operationIds are in the format "verbNoun".
+
+#Some Comments are copied from the Docker Engine API Specification
+
+openapi: 3.0.0
+
+
+info:
+  version: "1.0"
+  title: piveau-hub
+
+
+
+# The tags on paths define the menu sections in the ReDoc documentation, so
+# the usage of tags must make sense for that:
+# - They should be singular, not plural.
+# - There should not be too many tags, or the menu becomes unwieldly. For
+#   example, it is preferable to add a path to the "System" tag instead of
+#   creating a tag with a single path in it.
+# - The order of tags in this list defines the order in the menu.
+tags:
+  # Primary objects
+  - name: Datasets
+    x-displayName: "Datasets"
+    description: |
+      Create and manage Datasets.
+  - name: Catalogues
+    x-displayName: "Catalogues"
+  - name: Distributions
+    x-displayName: "Distributions"
+  - name: Records
+    x-displayName: "Records"
+
+paths:
+  /datasets:
+    get:
+      description: Get all datasets, if catalogue ID is specified, filter for catalogue.
+      summary: Get all datasets
+      operationId: listDatasets
+      tags:
+        - Datasets
+      parameters:
+        - name: catalogue
+          in: query
+          description: "ID of the Catalogue"
+          required: false
+          schema:
+            type: string
+        - name: sourceIds
+          in: query
+          description: "Indicate if a list of the datasets sourceIds should be returned. An empty value defaults to `true`. _If this parameter is present, LIMIT and OFFSET are ignored. *The whole list will be returned at once*_"
+          required: false
+          schema:
+            type: boolean
+          allowEmptyValue: true
+        - name: limit
+          in: query
+          description: limit the number of datasets that are returned. Default is 100 if not set
+          schema:
+            type: number
+          required: false
+        - name: offset
+          in: query
+          description: Specify the offset of the first dataset to return.
+          required: false
+          schema:
+            type: number
+      responses:
+        '200':
+          description: Request accepted.
+          content:
+            application/json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/trig:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request.
+    post:
+      description: Add a new dataset.
+      tags:
+        - Datasets
+      security:
+        - Authenticate: []
+          Authorize: []
+      summary: Add a new dataset
+      operationId: postDataset
+      parameters:
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which the Dataset should be saved to'
+          schema:
+            type: string
+      requestBody:
+        description: Model of the new Dataset
+        required: true
+        content:
+          application/rdf+xml:
+            schema:
+              type: string
+          application/n-triples:
+            schema:
+              type: string
+          application/trig:
+            schema:
+              type: string
+          text/turtle:
+            schema:
+              type: string
+          text/n3:
+            schema:
+              type: string
+      responses:
+        '201':
+          description: Created.
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/trig:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request. Either malformed JSON was provided or required fields are missing/misspelled.
+    put:
+      description: Add a new dataset.
+      tags:
+        - Datasets
+      security:
+        - Authenticate: []
+          Authorize: []
+      summary: Add a new dataset
+      operationId: putDatasetQuery
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: 'The ID of the dataset'
+          schema:
+            type: string
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which contains this dataset'
+          schema:
+            type: string
+        - name: hash
+          in: query
+          description: 'The hash from the source'
+          schema:
+            type: string
+      requestBody:
+        description: Model to add to the dataset
+        required: true
+        content:
+          application/rdf+xml:
+            schema:
+              type: string
+          application/n-triples:
+            schema:
+              type: string
+          application/trig:
+            schema:
+              type: string
+          text/turtle:
+            schema:
+              type: string
+          text/n3:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Dataset updated.
+        '201':
+          description: Dataset created.
+        '304':
+          description: Dataset skipped. No update necessary.
+        '400':
+          description: Invalid request.
+    delete:
+      description: Delete a Dataset
+      summary: Delete a Dataset
+      operationId: deleteDatasetQuery
+      tags:
+        - Datasets
+      parameters:
+        - name: id
+          in: query
+          required: true
+          description: 'The ID of the dataset'
+          schema:
+            type: string
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Dataset successfully deleted.
+        '404':
+          description: Dataset not found.
+  /datasets/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: 'ID of the Dataset. If the ID ends with *.jsonld*, *.rdf* or *.n3*, accept type is accordingly overwritten.'
+        required: true
+        schema:
+          type: string
+    get:
+      description: Get a Dataset
+      summary: Get a Dataset
+      operationId: getDataset
+      parameters:
+        - name: catalogue
+          in: query
+          required: false
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+        - name: useNormalizedID
+          in: query
+          required: false
+          description: "if *true*, the dataset id should be the normalized id,<br> if *false*, it should be the source id and needs also the catalogue parameter"
+          allowEmptyValue: true
+          schema:
+            type: boolean
+      tags:
+        - Datasets
+      responses:
+        '200':
+          description: Request accepted.
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/trig:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request.
+        '404':
+          description: Catalogue or Dataset ID not found.
+    put:
+      description: Create a Dataset with given id. When it already exists and has a different hash, it will be updated to the new Dataset. If it has the same hash, nothing will happen.
+      summary: Create/Update a Dataset
+      operationId: putDataset
+      tags:
+        - Datasets
+      parameters:
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+        - name: hash
+          in: query
+          description: 'The hash from the source'
+          schema:
+            type: string
+        - name: data
+          in: query
+          description: 'If set to true, callbacks for data upload are returned'
+          schema:
+            type: boolean
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Dataset updated.
+        '201':
+          description: Dataset created.
+        '304':
+          description: Dataset skipped. No update necessary.
+        '400':
+          description: Invalid request.
+    delete:
+      description: Delete a Dataset
+      summary: Delete a Dataset
+      operationId: deleteDataset
+      tags:
+        - Datasets
+      parameters:
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Request accepted.
+        '404':
+          description: Dataset ID not found.
+  /indexdataset/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: 'ID of the Dataset.'
+        required: true
+        schema:
+          type: string
+    put:
+      description: Index or reindex a Dataset with given id.
+      summary: Index/Reindex a Dataset
+      operationId: indexDataset
+      tags:
+        - Datasets
+      parameters:
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+      security:
+        - Authenticate: []
+      responses:
+        '200':
+          description: Request accepted.
+        '400':
+          description: Invalid request.
+        '500':
+          description: Indexing failed.
+  /catalogues:
+    get:
+      description: Get a list of all catalogues
+      summary: List all catalogues
+      operationId: listCatalogues
+      tags:
+        - Catalogues
+      responses:
+        '200':
+          description: Request accepted.
+          content:
+            application/json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request.
+    post:
+      description: Add a Catalogue
+      summary: Add a Catalogue. Use *PUT* for now.
+      tags:
+        - Catalogues
+      deprecated: true
+      operationId: postCatalogue
+      security:
+        - Authenticate: []
+          Authorize: []
+      requestBody:
+        description: Model to add to the dataset
+        required: true
+        content:
+          text/turtle:
+            schema:
+              type: string
+      responses:
+        '201':
+          description: Created.
+        '400':
+          description: Invalid request.
+  /catalogues/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: "ID of the Catalogue"
+        required: true
+        schema:
+          type: string
+    get:
+      description: Get a Catalogue
+      summary: Get a Catalogue
+      operationId: getCatalogue
+      tags:
+        - Catalogues
+      parameters:
+        - in: query
+          name: offset
+          schema:
+            type: integer
+          description: The number of items to skip before starting to collect the result set
+        - in: query
+          name: limit
+          schema:
+            type: integer
+          description: The numbers of items to return
+      responses:
+        '200':
+          description: Request accepted.
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request.
+        '404':
+          description: Catalogue ID not found.
+
+    put:
+      description: Create a new Catalogue. If a Catalogue with this id already exists, it will be overwritten.
+      summary: Create/Update a Catalogue
+      operationId: putCatalogue
+      tags:
+        - Catalogues
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Request accepted.
+        '400':
+          description: Invalid request.
+        '404':
+          description: Catalogue ID not found.
+    delete:
+      description: Delete a Catalogue
+      summary: Delete a Catalogue
+      operationId: deleteCatalogue
+      tags:
+        - Catalogues
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Request accepted.
+        '400':
+          description: Invalid request.
+        '404':
+          description: Catalogue ID not found.
+  /records/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: 'ID of the Record.'
+        required: true
+        schema:
+          type: string
+      - name: catalogue
+        in: query
+        description: ID of the catalogue the record is in
+        required: true
+        schema:
+          type: string
+    get:
+      description: Get a Catalogue Record
+      summary: Get a Record
+      operationId: getRecord
+      tags:
+        - Records
+      responses:
+        '200':
+          description: Request accepted.
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/trig:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request.
+        '404':
+          description: Record ID not found.
+  /distributions:
+    parameters:
+      - name: dataset
+        in: query
+        description: "ID of the Distributions dataset"
+        required: true
+        schema:
+          type: string
+      - name: catalogue
+        in: query
+        description: "ID of the Datasets Catalogue"
+        required: false
+        schema:
+          type: string
+    post:
+      summary: insert new Distribution into Dataset
+      description: insert new Distribution into Dataset
+      operationId: postDistribution
+      security:
+        - Authenticate: []
+      responses:
+        '201':
+          description: Distribution created
+        '404':
+          description: Distribution not found
+        '409':
+          description: Distribution already exists
+        '400':
+          description: Invalid request.
+        '500':
+          description: Internal Server Error
+      tags:
+        - Distributions
+  /distributions/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: 'ID of the distribution.'
+        required: true
+        schema:
+          type: string
+    get:
+      description: Get a Distribution
+      summary: Get a Distribution
+      parameters:
+        - name: useIdentifier
+          in: query
+          description: "Used to signal, if the original identifier or the id part of the URI is submitted"
+          required: false
+          allowEmptyValue: true
+          schema:
+            type: boolean
+      tags:
+        - Distributions
+      operationId: getDistribution
+      responses:
+        '200':
+          description: Request accepted.
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/trig:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request.
+        '404':
+          description: Dataset ID not found.
+    put:
+      description: Update a Distribution
+      summary: Update a Distribution
+      operationId: putDistribution
+      parameters:
+        - name: useIdentifier
+          in: query
+          description: "Used to signal, if the original identifier or the id part of the URI is submitted"
+          required: false
+          allowEmptyValue: true
+          schema:
+            type: boolean
+      tags:
+        - Distributions
+      security:
+        - Authenticate: []
+      responses:
+        '200':
+          description: Distribution updated.
+        '201':
+          description: Distribution created.
+        '400':
+          description: Invalid request.
+    delete:
+      description: Remove a Distribution
+      summary: Remove a Distribution
+      operationId: deleteDistribution
+      tags:
+        - Distributions
+      security:
+        - Authenticate: []
+      responses:
+        '200':
+          description: Distribution deleted.
+        '400':
+          description: Invalid request.
+        '404':
+          description: Distribution not found.
+  /translation-request:
+    post:
+      description: Post a new translation request.
+      summary: Post a new translation request.
+      operationId: postTranslationRequest
+      tags:
+        - Translation
+      responses:
+        '200':
+          description: Request accepted.
+        '400':
+          description: Invalid request.
+        '404':
+          description: Dataset ID not found.
+  /translation:
+    post:
+      description: Post a completed translation.
+      summary: Post a completed translation.
+      operationId: postTranslation
+      tags:
+        - Translation
+      security:
+        - Authenticate: []
+      responses:
+        '200':
+          description: Request accepted.
+        '400':
+          description: Invalid request.
+        '404':
+          description: Dataset ID not found.
+      requestBody:
+        description: JSON with the completed translations.
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+  /metrics:
+    parameters:
+      - name: id
+        in: query
+        required: false
+        description: 'The ID of the dataset for this metric'
+        schema:
+          type: string
+      - name: uriRef
+        in: query
+        required: false
+        description: 'The URI reference of the dataset for this metric'
+        schema:
+          type: string
+      - name: catalogue
+        in: query
+        required: false
+        description: 'The ID of the catalogue of the dataset for this metric'
+        schema:
+          type: string
+    put:
+      description: Create a Metric with given Dataset id. When it already exists and has a different hash, it will be updated to the existing Dataset. If it has the same hash, nothing will happen.
+      summary: Create/Update a Metric for a Dataset
+      operationId: putMetricQuery
+      tags:
+        - Metrics
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Metric updated.
+        '201':
+          description: Metric created.
+        '400':
+          description: Invalid request.
+    delete:
+      description: Delete a Metric
+      summary: Delete a Metric
+      operationId: deleteMetricQuery
+      tags:
+        - Metrics
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Request accepted.
+        '404':
+          description: Dataset ID not found.
+
+  /metrics/measurement:
+    put:
+      description: Add a dqv measurement to an existing measurement graph for one dataset.
+      summary: Add a dqv measurement to an existing measurement graph for one dataset.
+      operationId: putMeasurement
+      tags:
+        - Metrics
+      security:
+        - Authenticate: []
+          Authorize: []
+      requestBody:
+        description: DQV RDF containing measurment.
+        required: true
+        content:
+          application/rdf+xml:
+            schema:
+              type: string
+          application/n-triples:
+            schema:
+              type: string
+          application/trig:
+            schema:
+              type: string
+          text/turtle:
+            schema:
+              type: string
+          text/n3:
+            schema:
+              type: string
+      responses:
+        '200':
+          description: Metric updated.
+        '400':
+          description: Invalid request.
+
+  /metrics/{id}:
+    parameters:
+      - name: id
+        in: path
+        description: 'ID of the Dataset.'
+        required: true
+        schema:
+          type: string
+    get:
+      description: Get a Dataset and the metrics connected to it
+      summary: Get a Dataset and the metrics connected to it
+      operationId: getMetric
+      parameters:
+        - name: catalogue
+          in: query
+          required: false
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+        - name: useNormalizedID
+          in: query
+          required: false
+          description: "if *true*, the dataset id should be the normalized id,<br> if *false*, it should be the source id and needs also the catalogue parameter"
+          allowEmptyValue: true
+          schema:
+            type: boolean
+      tags:
+        - Metrics
+      responses:
+        '200':
+          description: Request accepted.
+          content:
+            application/ld+json:
+              schema:
+                type: string
+            application/rdf+xml:
+              schema:
+                type: string
+            text/turtle:
+              schema:
+                type: string
+            text/n3:
+              schema:
+                type: string
+            application/trig:
+              schema:
+                type: string
+            application/n-triples:
+              schema:
+                type: string
+        '400':
+          description: Invalid request.
+        '404':
+          description: Catalogue or Dataset ID not found.
+    put:
+      description: Create a Metric with given Dataset id. When it already exists and has a different hash, it will be updated to the existing Dataset. If it has the same hash, nothing will happen.
+      summary: Create/Update a Metric for a Dataset
+      operationId: putMetric
+      tags:
+        - Metrics
+      parameters:
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+        - name: hash
+          in: query
+          description: 'The hash from the source'
+          schema:
+            type: string
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Metric updated.
+        '201':
+          description: Metric created.
+        '400':
+          description: Invalid request.
+    delete:
+      description: Delete a Metric
+      summary: Delete a Metric
+      operationId: deleteMetric
+      tags:
+        - Metrics
+      parameters:
+        - name: catalogue
+          in: query
+          required: true
+          description: 'The ID of the catalogue which should contain this dataset'
+          schema:
+            type: string
+      security:
+        - Authenticate: []
+          Authorize: []
+      responses:
+        '200':
+          description: Request accepted.
+        '404':
+          description: Dataset ID not found.

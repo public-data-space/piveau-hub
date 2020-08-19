@@ -1,0 +1,9 @@
+@prefix pv:    <https://piveau.eu/ns/voc#> .
+@prefix dqv:   <http://www.w3.org/ns/dqv#> .
+
+<https://piveau.io/set/distribution/1>
+        dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                     dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                     dqv:isMeasurementOf  pv:accessUrlStatusCode ;
+                                     dqv:value            200
+                                   ] .

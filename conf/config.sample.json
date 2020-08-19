@@ -1,0 +1,48 @@
+{
+  "PIVEAU_HUB_SERVICE_PORT": 8080,
+  "PIVEAU_HUB_CORS_DOMAINS": [],
+  "greeting": "You know, for metadata!",
+  "PIVEAU_HUB_API_KEY": "yourapikey",
+  "PIVEAU_HUB_AUTHORIZATION_PROCESS_DATA": {
+    "publicKey": "gaerzhgqw3t6w85n76w897bn3t5z3w0489b6wn78u5",
+    "clientID": "client-xyz",
+    "client_secret": "347845387-342438-fgjn4389-3237486",
+    "keycloak_uri": "www.keycloak.example",
+    "keycloak_realm": "xyz",
+    "default_owner": "librarian"
+  },
+  "PIVEAU_HUB_BASE_URI": "https://piveau.io/",
+  "PIVEAU_HUB_VALIDATOR" : {
+    "enabled": false,
+    "url": "http://localhost:8083"
+  },
+  "PIVEAU_HUB_SEARCH_SERVICE": {
+    "enabled": true,
+    "url": "localhost",
+    "port": 8081,
+    "api_key": "myapikey"
+  },
+  "PIVEAU_HUB_LOAD_VOCABULARIES": true,
+  "PIVEAU_HUB_LOAD_VOCABULARIES_FETCH": false,
+  "PIVEAU_TRANSLATION_SERVICE": {
+    "enable": false,
+    "accepted_languages": ["en", "bg", "hr", "cs", "da", "nl", "et", "fi", "fr", "el",
+      "hu", "ga", "it", "lv", "lt", "mt", "pl", "pt", "ro", "sk", "sl", "es", "sv", "nb", "de"],
+    "translation_service_url": "https://www.url.eu/translation-service/",
+    "callback_url": "http://localhost:8080/translation"
+  },
+  "PIVEAU_DATA_UPLOAD": {
+    "url": "http://localhost:8086",
+    "service_url": "http://localhost:8086",
+    "api_key": "Bearer db916db8-8aeb-4915-a3b9-f6b264b5d983"
+  },
+  "PIVEAU_TRIPLESTORE_CONFIG": {
+    "address": "http://localhost:8890",
+    "graphEndpoint": "/sparql-graph-crud",
+    "graphAuthEndpoint": "/sparql-graph-crud-auth",
+    "queryEndpoint": "/sparql",
+    "queryAuthEndpoint": "/sparql-auth",
+    "username": "dba",
+    "password": "dba"
+  }
+}

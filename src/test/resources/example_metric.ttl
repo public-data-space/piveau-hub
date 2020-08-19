@@ -1,0 +1,163 @@
+@prefix pv:    <https://piveau.eu/ns/voc#> .
+@prefix xsd:   <http://www.w3.org/2001/XMLSchema#> .
+@prefix dqv:   <http://www.w3.org/ns/dqv#> .
+@prefix rdfs:  <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix dcat:  <http://www.w3.org/ns/dcat#> .
+@prefix foaf:  <http://xmlns.com/foaf/0.1/> .
+@prefix dc:    <http://purl.org/dc/terms/> .
+
+<https://piveau.io/set/distribution/1>
+        a                 dcat:Distribution ;
+        dc:description    "Sample distribution description" ;
+        dc:format         "json" ;
+        dc:identifier     "sampleDistribution" ;
+        dc:issued         "2018-12-10T23:02:42.520"^^xsd:dateTime ;
+        dc:license        <http://www.opendefinition.org/licenses/cc-zero> ;
+        dc:modified       "2017-10-19T00:00:00"^^xsd:dateTime ;
+        dc:rights         "Creative Commons CCZero" ;
+        dc:title          "Sample distribution title" ;
+        dcat:accessURL    <http://example.com> ;
+        dcat:downloadURL  <http://example.com/download> .
+
+<http://publications.europa.eu/resource/authority/corporate-body/EURCOM>
+        a              foaf:Agent ;
+        rdfs:label     "Organisation Label" ;
+        foaf:homepage  <http://www.lorem.ipsum/org> ;
+        foaf:name      "Organisation Name" .
+
+<https://piveau.io/set/data/test-dataset>
+        a                  dcat:Dataset ;
+        dc:accessRights    "PUBLIC" ;
+        dc:description     "Sample dataset description" ;
+        dc:identifier      "sampleDataset" ;
+        dc:issued          "2017-10-19T00:00:00"^^xsd:dateTime ;
+        dc:modified        "2019-04-17T08:00:40.660"^^xsd:dateTime ;
+        dc:publisher       <http://publications.europa.eu/resource/authority/corporate-body/EURCOM> ;
+        dc:title           "Sample dataset" ;
+        dcat:distribution  <https://piveau.io/set/distribution/sampledistribution> ;
+        dcat:keyword       "logistics" , "weather" .
+
+<urn:junit5-tests:test-pipe> {
+    <https://piveau.io/set/data/test-dataset>
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:scoring ;
+                                         dqv:value            100
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:temporalAvailability ;
+                                         dqv:value            false
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:spatialAvailability ;
+                                         dqv:value            false
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:publisherAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:keywordAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:contactPointAvailability ;
+                                         dqv:value            false
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:categoryAvailability ;
+                                         dqv:value            false
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:accessRightsVocabularyAlignment ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/data/test-dataset> ;
+                                         dqv:isMeasurementOf  pv:accessRightsAvailability ;
+                                         dqv:value            true
+                                       ] .
+
+    <https://piveau.io/set/distribution/1>
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:rightsAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:mediaTypeAvailability ;
+                                         dqv:value            false
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:licenceAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:formatAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:downloadUrlAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:dateModifiedAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:dateIssuedAvailability ;
+                                         dqv:value            true
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:byteSizeAvailability ;
+                                         dqv:value            false
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:accessUrlStatusCode ;
+                                         dqv:value            200
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:downloadUrlStatusCode ;
+                                         dqv:value            200
+                                       ] ;
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/1> ;
+                                         dqv:isMeasurementOf  pv:downloadUrlStatusCode ;
+                                         dqv:value            404
+                                       ] .
+
+    <https://piveau.io/set/distribution/2>
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/2> ;
+                                         dqv:isMeasurementOf  pv:accessUrlStatusCode ;
+                                         dqv:value            200
+                                       ] .
+
+    <https://piveau.io/set/distribution/3>
+            dqv:hasQualityMeasurement  [ a                    dqv:QualityMeasurement ;
+                                         dqv:computeOn        <https://piveau.io/set/distribution/3> ;
+                                         dqv:isMeasurementOf  pv:accessUrlStatusCode ;
+                                         dqv:value            404
+                                       ] .
+
+    <urn:junit5-tests:test-pipe>
+            a       dqv:QualityMetadata ;
+            <http://www.w3.org/ns/prov#generatedAtTime>
+                    "2019-09-24T10:20:54.808068200Z"^^xsd:dateTime .
+}

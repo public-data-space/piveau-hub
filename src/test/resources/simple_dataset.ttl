@@ -1,0 +1,39 @@
+@prefix dcat: <http://www.w3.org/ns/dcat#> .
+@prefix dct: <http://purl.org/dc/terms/> .
+@prefix dc: <http://purl.org/dc/elements/1.1/> .
+@prefix foaf: <http://xmlns.com/foaf/0.1/> .
+@prefix locn: <http://www.w3.org/ns/locn#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@prefix schema: <http://schema.org/> .
+@prefix skos: <http://www.w3.org/2004/02/skos/core#> .
+@prefix time: <http://www.w3.org/2006/time> .
+@prefix vcard: <http://www.w3.org/2006/vcard/ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix edp: <https://europeandataportal.eu/voc#>
+
+<https://example.eu/dataset111>
+    a dcat:Dataset ;
+    dct:title "Simple Dataset 2" ;
+    dct:language  <http://publications.europa.eu/resource/authority/language/ENG> ;
+    dct:description "This is a simple Dataset" ;
+    dcat:theme <http://publications.europa.eu/resource/authority/data-theme/ENVI> ;
+    dct:issued "2015-08-28T00:00:00"^^xsd:dateTime ;
+    dct:modified "2018-04-03T13:48:21.950626"^^xsd:dateTime ;
+    dcat:distribution <https://example.eu/dataset111/resource/1>, <https://example.eu/dataset111/resource/2> .
+
+<https://example.eu/dataset111/resource/1>
+    a dcat:Distribution ;
+    dcat:accessURL <http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/4fbc1cdb-7d27-4f45-ba6a-95b94fa63832/Sediment.csv> ;
+    dct:format "CSV"  ;
+    dct:title "Simple Distribution 1" ;
+    dct:description "This is a simple Distribution 1" .
+
+<https://example.eu/dataset111/resource/2>
+    a dcat:Distribution ;
+    dcat:accessURL <http://daten.transparenz.hamburg.de/Dataport.HmbTG.ZS.Webservice.GetRessource100/GetRessource100.svc/4fbc1cdb-7d27-4f45-ba6a-95b94fa63832/Sediment.csv> ;
+    dct:format "PDF" ;
+    dct:title "Simple Distribution 2" ;
+    dct:description "This is a simple Distribution 2" .

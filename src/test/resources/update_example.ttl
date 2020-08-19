@@ -1,0 +1,96 @@
+ <https://europeandataportal.eu/set/distribution/1e3a0819-0750-4e2b-b384-9c75de6144c4>
+        a       <http://www.w3.org/ns/dcat#Distribution> ;
+        <http://purl.org/dc/terms/description>
+                "Länk till WMS-tjänst." ;
+        <http://purl.org/dc/terms/format>
+                "WMS" ;
+        <http://purl.org/dc/terms/identifier>
+                "http://mdk.vic-metria.nu/geonetwork/distribution/6f76fcf9-39f4-4523-b3a2-a327f9484b88-1" ;
+        <http://purl.org/dc/terms/license>
+                "http://creativecommons.org/publicdomain/zero/1.0/" ;
+        <http://purl.org/dc/terms/rights>
+                [ a       <http://purl.org/dc/terms/RightsStatement> ;
+                  <http://www.w3.org/2000/01/rdf-schema#label>
+                          "Andra villkor."@sv
+                ] ;
+        <http://purl.org/dc/terms/title>
+                "Beskrivande namn på Online-källa" ;
+        <http://www.w3.org/ns/dcat#accessURL>
+                <http://gpt.vic-metria.nu/wmsconnector/com.esri.wms.Esrimap/fjarranalyskartering?layers=STORMSKADOR_KARTOMR> .
+
+<https://europeandataportal.eu/set/record/http-mdk-vic-metria-nu-geonetwork-resource-6f76fcf9-39f4-4523-b3a2-a327f9484b88>
+        a       <http://www.w3.org/ns/dcat#CatalogRecord> ;
+        <http://purl.org/dc/terms/created>
+                "2019-08-14T08:24:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://purl.org/dc/terms/identifier>
+                "http://mdk.vic-metria.nu/geonetwork/resource/6f76fcf9-39f4-4523-b3a2-a327f9484b88" ;
+        <http://purl.org/dc/terms/modified>
+                "2019-08-14T08:24:12Z"^^<http://www.w3.org/2001/XMLSchema#dateTime> ;
+        <http://www.w3.org/ns/dqv#hasQualityAnnotation>
+                <https://europeandataportal.eu/id/validation/http-mdk-vic-metria-nu-geonetwork-resource-6f76fcf9-39f4-4523-b3a2-a327f9484b88> ;
+        <http://xmlns.com/foaf/0.1/primaryTopic>
+                <https://europeandataportal.eu/set/data/http-mdk-vic-metria-nu-geonetwork-resource-6f76fcf9-39f4-4523-b3a2-a327f9484b88> ;
+        <https://spdx.org/rdf/terms/#checksum>
+                [ a       <https://spdx.org/rdf/terms/#Checksum> ;
+                  <https://spdx.org/rdf/terms/#algorithm>
+                          <https://spdx.org/rdf/terms/#checksumAlgorithm_md5> ;
+                  <https://spdx.org/rdf/terms/#checksumValue>
+                          "d217356e8416a248fe81fd4d523d2de2"
+                ] .
+
+<https://registrera.oppnadata.se/store/635/resource/9de761c624866bdca2f2e6ccdeba9815>
+        a       <http://xmlns.com/foaf/0.1/Agent> ;
+        <http://purl.org/dc/terms/type>
+                <http://purl.org/adms/publishertype/NationalAuthority> ;
+        <http://xmlns.com/foaf/0.1/mbox>
+                <mailto:data@naturvardsverket.se> ;
+        <http://xmlns.com/foaf/0.1/name>
+                "Naturvårdsverket"@sv .
+
+<https://europeandataportal.eu/set/distribution/fcc55a5d-a6bd-4aae-a731-e2915566a851>
+        a       <http://www.w3.org/ns/dcat#Distribution> ;
+        <http://purl.org/dc/terms/description>
+                "Länk till WMS-tjänst." ;
+        <http://purl.org/dc/terms/format>
+                "WMS" ;
+        <http://purl.org/dc/terms/identifier>
+                "http://mdk.vic-metria.nu/geonetwork/distribution/6f76fcf9-39f4-4523-b3a2-a327f9484b88-2" ;
+        <http://purl.org/dc/terms/license>
+                "http://creativecommons.org/publicdomain/zero/1.0/" ;
+        <http://purl.org/dc/terms/rights>
+                [ a       <http://purl.org/dc/terms/RightsStatement> ;
+                  <http://www.w3.org/2000/01/rdf-schema#label>
+                          "Andra villkor."@sv
+                ] ;
+        <http://purl.org/dc/terms/title>
+                "Beskrivande namn på Online-källa" ;
+        <http://www.w3.org/ns/dcat#accessURL>
+                <http://gpt.vic-metria.nu/wmsconnector/com.esri.wms.Esrimap/fjarranalyskartering?layers=STORMSKADOR_KARTOMR> .
+
+<https://europeandataportal.eu/set/data/http-mdk-vic-metria-nu-geonetwork-resource-6f76fcf9-39f4-4523-b3a2-a327f9484b88>
+        a       <http://www.w3.org/ns/dcat#Dataset> ;
+        <http://purl.org/dc/terms/created>
+                "2005-01-01"^^<http://www.w3.org/2001/XMLSchema#date> ;
+        <http://purl.org/dc/terms/description>
+                "Karteringsområdet stormskador"@sv ;
+        <http://purl.org/dc/terms/language>
+                <http://publications.europa.eu/resource/authority/language/SWE> ;
+        <http://purl.org/dc/terms/license>
+                <http://creativecommons.org/publicdomain/zero/1.0/> ;
+        <http://purl.org/dc/terms/publisher>
+                <https://registrera.oppnadata.se/store/635/resource/9de761c624866bdca2f2e6ccdeba9815> ;
+        <http://purl.org/dc/terms/spatial>
+                [ a       <http://purl.org/dc/terms/Location> ;
+                  <http://www.w3.org/ns/locn#geometry>
+                          "BOX(12.73 56.41,14.52 57.61)"^^<http://www.openlinksw.com/schemas/virtrdf#Geometry>
+                ] ;
+        <http://purl.org/dc/terms/title>
+                "Karteringsområdet stormskador"@sv ;
+        <http://www.w3.org/ns/dcat#contactPoint>
+                <http://mdk.vic-metria.nu/geonetwork/organisation/Naturv%C3%A5rdsverket> ;
+        <http://www.w3.org/ns/dcat#distribution>
+                <https://europeandataportal.eu/set/distribution/fcc55a5d-a6bd-4aae-a731-e2915566a851> , <https://europeandataportal.eu/set/distribution/1e3a0819-0750-4e2b-b384-9c75de6144c4> ;
+        <http://www.w3.org/ns/dcat#keyword>
+                "Naturvårdsverket" ;
+        <http://www.w3.org/ns/dcat#theme>
+                <http://publications.europa.eu/resource/authority/data-theme/ENVI> .

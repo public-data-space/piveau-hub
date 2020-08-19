@@ -1,0 +1,88 @@
+# For a quick start check out our HTTP Requests collection (Tools|HTTP Client|Open HTTP Requests Collection).
+#
+# Following HTTP Request Live Templates are available:
+# * 'gtrp' and 'gtr' create a GET request with or without query parameters;
+# * 'ptr' and 'ptrp' create a POST request with a simple or parameter-like body;
+# * 'mptr' and 'fptr' create a POST request to submit a form with a text or file field (multipart/form-data);
+
+PUT http://{{host}}:{{port}}/catalogues/catalog-1
+Content-Type: text/turtle
+Authorization: {{api-key}}
+
+< ../src/test/resources/example_catalog.ttl
+
+###
+
+DELETE http://{{host}}:{{port}}/catalogues/catalog-1
+Content-Type: text/turtle
+Authorization: {{api-key}}
+
+###
+
+PUT http://{{host}}:{{port}}/datasets/dataset-1?catalogue=catalog-1
+Content-Type: text/turtle
+Authorization: {{api-key}}
+
+< ../src/test/resources/example_dataset.ttl
+
+###
+
+
+DELETE http://{{host}}:{{port}}/datasets/dataset-1?catalogue=catalog-1
+Content-Type: text/turtle
+Authorization: {{api-key}}
+
+###
+
+POST http://{{host}}:{{port}}/distributions?dataset=dataset-1&catalogue=catalog-1
+Content-Type: text/turtle
+Authorization: {{api-key}}
+
+< ../src/test/resources/example_distribution.ttl
+
+###
+
+PUT http://{{host}}:{{port}}/distributions/my-own-identifier?useIdentifier=true
+Content-Type: text/turtle
+Authorization: {{api-key}}
+
+< ../src/test/resources/example_distribution.ttl
+
+###
+
+DELETE http://{{host}}:{{port}}/distributions/04ffe354-86df-42e8-a5dc-ea0d1bf34162
+Content-Type: text/turtle
+Authorization: {{api-key}}
+
+###
+
+GET http://{{host}}:{{port}}/catalogues
+Accept: text/turtle
+
+###
+
+
+GET http://{{host}}:{{port}}/catalogues/catalog-1
+Accept: text/turtle
+
+###
+
+GET http://{{host}}:{{port}}/distributions/cb1c8ef4-54df-44cf-bc9f-152b5861787c
+Accept: text/turtle
+
+###
+
+GET http://{{host}}:{{port}}/records/dataset-1?catalogue=catalog-1
+Accept: text/turtle
+
+###
+
+GET http://{{host}}:{{port}}/datasets/dataset-1?catalogue=catalog-1
+Accept: text/turtle
+
+###
+
+PUT http://{{host}}:{{port}}/indexdataset/dataset-1?catalogue=catalog-1
+Authorization: {{api-key}}
+
+###

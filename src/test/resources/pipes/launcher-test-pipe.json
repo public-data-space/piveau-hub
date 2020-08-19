@@ -1,0 +1,26 @@
+{
+  "header": {
+    "id": "ee9218a5-a86a-47ca-97c7-adff281a94b7",
+    "name": "launcher-test-pipe",
+    "title": "Test Pipe",
+    "context": "JUnit5 Tests",
+    "transport": "payload",
+    "version": "1.0"
+  },
+  "body": {
+    "segments": [
+      {
+        "header": {
+          "name": "launcher-test-segment",
+          "segmentNumber": 1,
+          "title": "Test 1",
+          "processed": false
+        },
+        "body": {
+          "config": {
+          }
+        }
+      }
+    ]
+  }
+}

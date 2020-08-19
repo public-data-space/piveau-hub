@@ -1,0 +1,35 @@
+<configuration>
+
+<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+    <encoder>
+        <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+    </encoder>
+</appender>
+
+<property name="hubAppender" value="${PIVEAU_HUB_LOG_APPENDER:-STDOUT}" />
+
+<if condition='property("hubAppender").equals("LOGSTASH")'>
+    <then>
+        <appender name="LOGSTASH" class="net.logstash.logback.appender.LogstashTcpSocketAppender">
+            <destination>${PIVEAU_LOGSTASH_HOST:-logstash}:${PIVEAU_LOGSTASH_PORT:-5044}</destination>
+            <encoder class="net.logstash.logback.encoder.LogstashEncoder" />
+        </appender>
+    </then>
+</if>
+
+<logger name="com.mchange.v2" level="warn"/>
+<logger name="io.netty" level="warn"/>
+<logger name="io.vertx" level="info"/>
+<logger name="com.hazelcast" level="info"/>
+<logger name="org.apache.jena.riot" level="error"/>
+<logger name="io.piveau" level="${PIVEAU_LOG_LEVEL:-INFO}"/>
+
+<logger name="piveau.hub" level="${PIVEAU_HUB_LOG_LEVEL:-INFO}" additivity="false">
+    <appender-ref ref="${hubAppender}" />
+</logger>
+
+<root level="info">
+    <appender-ref ref="STDOUT" />
+</root>
+
+</configuration>
